@@ -9,7 +9,6 @@
 import UIKit
 
 class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
-    
     @IBOutlet weak var picker: UIPickerView!
     var pickerData: [String] = [String]()
     //Number of column of data
@@ -24,11 +23,8 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
     }
-    
     @IBOutlet weak var stateSwitch: UISwitch!
-    
     @IBOutlet weak var changedLabel: UILabel!
-    
     @IBAction func changeSwitch(_ sender: Any) {
         if stateSwitch.isOn {
             changedLabel.text = "Switch is on"
@@ -36,20 +32,16 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
             changedLabel.text = "Switch is off"
         }
     }
-    
     @IBOutlet weak var slider: UISlider!
-    
     @IBAction func changeSlider(_ sender: Any) {
         let value = Int(slider.value)
         sliderValue.text = String(value)
     }
     @IBOutlet weak var sliderValue: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //Label
-        let label = UILabel(frame: CGRect(x: 50, y: 120, width: 200 , height: 50))
+        let label = UILabel(frame: CGRect(x: 50, y: 120, width: 200, height: 50))
         label.text = "A simple label"
         label.textAlignment = .center
         label.font = label.font.withSize(25)
@@ -69,7 +61,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         textField.isSecureTextEntry = true
         view.addSubview(textField)
         
-        let textView = UITextView(frame: CGRect(x: 50, y: 270, width: 200 , height: 50))
+        let textView = UITextView(frame: CGRect(x: 50, y: 270, width: 200, height: 50))
         textView.text = "A simple textView"
         textView.textAlignment = .center
         textView.font = label.font.withSize(25)
@@ -98,8 +90,5 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         let searchBar = UISearchBar(frame: CGRect(x: 30, y: 50, width: 350, height: 50))
         searchBar.placeholder = "Search"
         view.addSubview(searchBar)
-        
     }
-    
 }
-
