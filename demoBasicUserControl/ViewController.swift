@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var picker: UIPickerView!
     var pickerData: [String] = [String]()
     //Number of column of data
@@ -38,9 +38,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         sliderValue.text = String(value)
     }
     @IBOutlet weak var sliderValue: UILabel!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //Label
+    private func setupLabel() -> UILabel {
         let label = UILabel(frame: CGRect(x: 50, y: 120, width: 200, height: 50))
         label.text = "A simple label"
         label.textAlignment = .center
@@ -48,44 +46,56 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         label.textColor = .systemRed
         label.backgroundColor = .systemYellow
         label.numberOfLines = 2
-        view.addSubview(label)
-        
-        //Text field
-        let textField = UITextField(frame: CGRect(x: 50, y: 200, width: 200 , height: 50))
-//        textField.text = "A simple text field"
+        return label
+    }
+    private func setupTextField() -> UITextField {
+        let textField = UITextField(frame: CGRect(x: 50, y: 200, width: 200, height: 50))
         textField.font = textField.font?.withSize(25)
         textField.textColor = .systemBlue
         textField.backgroundColor = .systemYellow
         textField.placeholder = "Enter your password"
         textField.textContentType = .password
         textField.isSecureTextEntry = true
-        view.addSubview(textField)
-        
+        return textField
+    }
+    private func setupTextView() -> UITextView {
         let textView = UITextView(frame: CGRect(x: 50, y: 270, width: 200, height: 50))
         textView.text = "A simple textView"
         textView.textAlignment = .center
-        textView.font = label.font.withSize(25)
         textView.textColor = .systemRed
         textView.backgroundColor = .systemYellow
         textView.isEditable = false
         textView.isScrollEnabled = false
-        view.addSubview(textView)
-        
-        //Picker view
-        //connect data of picker view
-        self.picker.delegate = self
-        self.picker.dataSource = self
-        //Data of picker
-        pickerData = ["item1","item2","item3","item4","item5"]
-        
-        //Segmented control
+        return textView
+    }
+    private func setupSegment() -> UISegmentedControl {
         let segmentControl = UISegmentedControl(frame: CGRect(x: 110, y: 350, width: 200, height: 50))
         segmentControl.insertSegment(withTitle: "item1", at: 0, animated: true)
         segmentControl.insertSegment(withTitle: "item2", at: 1, animated: true)
         segmentControl.insertSegment(withTitle: "item3", at: 2, animated: true)
         segmentControl.selectedSegmentIndex = 0
+        return segmentControl
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //Label
+        let label = setupLabel()
+        view.addSubview(label)
+        //Text field
+        let textField = setupTextField()
+        view.addSubview(textField)
+        //Text view
+        let textView = setupTextView()
+        view.addSubview(textView)
+        //Picker view
+        //connect data of picker view
+        self.picker.delegate = self
+        self.picker.dataSource = self
+        //Data of picker
+        pickerData = ["item1", "item2", "item3", "item4", "item5"]
+        //Segmented control
+        let segmentControl = setupSegment()
         view.addSubview(segmentControl)
-        
         //Search bar
         let searchBar = UISearchBar(frame: CGRect(x: 30, y: 50, width: 350, height: 50))
         searchBar.placeholder = "Search"
